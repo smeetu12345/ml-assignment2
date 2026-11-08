@@ -1,4 +1,4 @@
-﻿"""Streamlit front-end: evaluate the pre-trained shopper-intent classifiers on an uploaded test CSV."""
+"""Streamlit front-end: evaluate the pre-trained shopper-intent classifiers on an uploaded test CSV."""
 from pathlib import Path
 
 import joblib
@@ -21,7 +21,7 @@ MODEL_FILES = {
     "Support Vector Machine": "support_vector_machine.joblib",
 }
 
-st.set_page_config(page_title="ShopperSense â€“ Purchase Intent Classifier", page_icon="ðŸ›’", layout="wide")
+st.set_page_config(page_title="ShopperSense – Purchase Intent Classifier", page_icon="🛒", layout="wide")
 
 
 @st.cache_resource
@@ -55,19 +55,19 @@ def evaluate(pipe, X, y) -> tuple[dict, pd.Series, pd.Series]:
 
 
 # ---------------- Sidebar ----------------
-st.sidebar.title("ðŸ›’ ShopperSense")
-st.sidebar.caption("M.Tech AIML Â· ML Assignment 2")
+st.sidebar.title("🛒 ShopperSense")
+st.sidebar.caption("M.Tech AIML · ML Assignment 2")
 chosen_model = st.sidebar.selectbox("Choose a classifier", list(MODEL_FILES.keys()))
 show_all = st.sidebar.checkbox("Also compare all 5 models", value=True)
 st.sidebar.markdown("---")
 sample_path = APP_DIR / "test_data.csv"
 if sample_path.exists():
-    st.sidebar.download_button("â¬‡ï¸ Download sample test_data.csv", sample_path.read_bytes(),
+    st.sidebar.download_button("⬇️ Download sample test_data.csv", sample_path.read_bytes(),
                                file_name="test_data.csv", mime="text/csv")
-st.sidebar.info("Models were trained offline; uploading data here only **evaluates** them â€” no retraining.")
+st.sidebar.info("Models were trained offline; uploading data here only **evaluates** them — no retraining.")
 
 # ---------------- Main ----------------
-st.title("Will this visitor buy? ðŸ›ï¸")
+st.title("Will this visitor buy? 🛍️")
 st.write(
     "Predicting purchase intent from e-commerce browsing sessions "
     "(UCI *Online Shoppers Purchasing Intention* dataset). Upload a test CSV containing the 17 "
@@ -76,7 +76,7 @@ st.write(
 
 uploaded = st.file_uploader("Upload test data (CSV)", type=["csv"])
 if uploaded is None:
-    st.warning("Upload a CSV to begin â€” you can grab the sample `test_data.csv` from the sidebar.")
+    st.warning("Upload a CSV to begin — you can grab the sample `test_data.csv` from the sidebar.")
     st.stop()
 
 data = clean_uploaded(pd.read_csv(uploaded))
@@ -100,7 +100,7 @@ with st.expander("Preview uploaded data"):
     st.dataframe(data.head(20), width="stretch")
 
 # ---- selected model
-st.header(f"ðŸ“Š {chosen_model}")
+st.header(f"📊 {chosen_model}")
 pipe = load_pipeline(MODEL_FILES[chosen_model])
 scores, y_pred, y_prob = evaluate(pipe, X_test, y_test)
 
@@ -135,7 +135,7 @@ st.dataframe(pd.DataFrame(report).T.round(4), width="stretch")
 
 # ---- all models
 if show_all:
-    st.header("ðŸ All models on this test data")
+    st.header("🏁 All models on this test data")
     table = []
     for name, fname in MODEL_FILES.items():
         s, _, _ = evaluate(load_pipeline(fname), X_test, y_test)

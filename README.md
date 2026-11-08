@@ -1,4 +1,4 @@
-﻿# ShopperSense â€“ Predicting Online Purchase Intent (ML Assignment 2)
+# ShopperSense – Predicting Online Purchase Intent (ML Assignment 2)
 
 **Live app:** https://shoppersense-smeet.streamlit.app/  
 **GitHub repo:** https://github.com/smeetu12345/ml-assignment2
@@ -13,7 +13,7 @@ Five classifiers (Logistic Regression, Decision Tree, KNN, Gaussian Naive Bayes 
 
 | Item | Details |
 |---|---|
-| Source | UCI Machine Learning Repository â€“ [Online Shoppers Purchasing Intention Dataset](https://archive.ics.uci.edu/dataset/468/online+shoppers+purchasing+intention+dataset) (Sakar et al., 2018) |
+| Source | UCI Machine Learning Repository – [Online Shoppers Purchasing Intention Dataset](https://archive.ics.uci.edu/dataset/468/online+shoppers+purchasing+intention+dataset) (Sakar et al., 2018) |
 | Instances | 12,330 sessions (12,205 after removing 125 duplicate rows) |
 | Features | 17 input features plus 1 target |
 | Target | `Revenue` (1 = purchase, 0 = no purchase) |
@@ -31,20 +31,20 @@ Five classifiers (Logistic Regression, Decision Tree, KNN, Gaussian Naive Bayes 
 https://github.com/smeetu12345/ml-assignment2
 
 ```
-â”œâ”€â”€ app.py                      # Streamlit app
-â”œâ”€â”€ requirements.txt
-â”œâ”€â”€ README.md
-â”œâ”€â”€ test_data.csv               # hold-out test set (upload this in the app)
-â”œâ”€â”€ data/online_shoppers_intention.csv   # raw UCI data
-â”œâ”€â”€ ML_Assignment2_BITS_Lab.ipynb        # notebook run on BITS Virtual Lab
-â””â”€â”€ model/
-    â”œâ”€â”€ train_models.py         # training + evaluation script
-    â”œâ”€â”€ metrics_summary.csv
-    â”œâ”€â”€ logistic_regression.joblib
-    â”œâ”€â”€ decision_tree.joblib
-    â”œâ”€â”€ knn.joblib
-    â”œâ”€â”€ naive_bayes.joblib
-    â””â”€â”€ support_vector_machine.joblib
+├── app.py                      # Streamlit app
+├── requirements.txt
+├── README.md
+├── test_data.csv               # hold-out test set (upload this in the app)
+├── data/online_shoppers_intention.csv   # raw UCI data
+├── ML_Assignment2_BITS_Lab.ipynb        # notebook run on BITS Virtual Lab
+└── model/
+    ├── train_models.py         # training + evaluation script
+    ├── metrics_summary.csv
+    ├── logistic_regression.joblib
+    ├── decision_tree.joblib
+    ├── knn.joblib
+    ├── naive_bayes.joblib
+    └── support_vector_machine.joblib
 ```
 
 **Run locally**
@@ -70,7 +70,7 @@ All metrics are computed on the 20 % hold-out test set. Precision, Recall and F1
 
 | ML Model Name | Observation about model performance |
 |---|---|
-| Logistic Regression | A strong linear baseline: AUC 0.92 and recall 0.80. With balanced class weights it finds most buyers, but precision is only 0.53, so it raises many false alarms. Its ranking ability is good, but a linear boundary cannot capture interactions such as PageValues Ã— ExitRates. |
+| Logistic Regression | A strong linear baseline: AUC 0.92 and recall 0.80. With balanced class weights it finds most buyers, but precision is only 0.53, so it raises many false alarms. Its ranking ability is good, but a linear boundary cannot capture interactions such as PageValues × ExitRates. |
 | Decision Tree | Best model overall: highest AUC (0.938), recall (0.874), F1 (0.672) and MCC (0.620). The tree splits mainly on `PageValues` first, a threshold-style rule that suits this data. Limiting depth to 7 and requiring at least 20 samples per leaf stops it from overfitting. |
 | KNN | Has the highest accuracy (0.875) and precision (0.694), but recall is only 0.356, so it misses about two-thirds of buyers. KNN cannot use class weights, so the majority "no purchase" class dominates the neighbourhoods. Its accuracy looks high only because of the class imbalance, and its MCC (0.437) is among the lowest. |
 | Naive Bayes | Weakest model (MCC 0.418, accuracy 0.81). Its independence assumption is broken here because page counts and durations are strongly correlated, and the one-hot features are not Gaussian. Without extra variance smoothing its accuracy fell to about 0.30. |
