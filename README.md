@@ -1,6 +1,6 @@
 ﻿# ShopperSense â€“ Predicting Online Purchase Intent (ML Assignment 2)
 
-**Live app:** https://STREAMLIT_APP_URL  
+**Live app:** https://shoppersense-smeet.streamlit.app/  
 **GitHub repo:** https://github.com/smeetu12345/ml-assignment2
 
 ## a. Problem statement
